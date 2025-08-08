@@ -170,6 +170,12 @@
             align-items: center;
             justify-content: center;
             gap: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .equation-transform:hover {
+            transform: scale(1.05);
         }
 
         .heart-beat {
@@ -215,6 +221,15 @@
             align-items: center;
             margin: 1.5rem 0;
             font-size: 1.2rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .metric-bar:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(10px);
         }
 
         .progress-visual {
@@ -268,6 +283,12 @@
             gap: 2rem;
             margin: 3rem 0;
             flex-wrap: wrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hypothesis-equation:hover {
+            transform: scale(1.05);
         }
 
         .brain-visual {
@@ -281,6 +302,12 @@
             align-items: center;
             justify-content: center;
             animation: brainPulse 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .brain-visual:hover {
+            animation-duration: 1s;
         }
 
         @keyframes brainPulse {
@@ -308,6 +335,13 @@
             justify-content: center;
             font-size: 1.5rem;
             animation: orbit 10s linear infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .concept:hover {
+            transform: scale(1.3);
+            z-index: 100;
         }
 
         @keyframes orbit {
@@ -436,6 +470,7 @@
             transition: all 0.3s ease;
             color: #0f0f23;
             font-weight: bold;
+            position: relative;
         }
 
         .element:hover {
@@ -494,6 +529,13 @@
             padding: 2rem;
             text-align: center;
             border: 1px solid rgba(102, 252, 241, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-widget:hover {
+            background: rgba(102, 252, 241, 0.15);
+            transform: translateY(-5px);
         }
 
         .widget-value {
@@ -521,274 +563,87 @@
             50% { opacity: 0.3; }
         }
 
-        /* SLIDE 8: Montaña de Evolución */
-        .slide-8 {
-            background: linear-gradient(to bottom, #1a2332 0%, #2a2d5a 50%, #1a1a3a 100%);
-        }
-
-        .mountain-container {
-            position: relative;
-            width: 600px;
-            height: 400px;
-            margin: 2rem auto;
-        }
-
-        .mountain {
-            width: 100%;
-            height: 100%;
-            clip-path: polygon(0% 100%, 20% 80%, 40% 60%, 50% 20%, 60% 60%, 80% 80%, 100% 100%);
-            background: linear-gradient(to top, #4ecdc4, #66fcf1);
-            position: relative;
-        }
-
-        .mountain-path {
-            position: absolute;
-            bottom: 20px;
-            left: 50px;
-            width: calc(100% - 100px);
-            height: 4px;
-            background: #ffd700;
-            clip-path: polygon(0% 50%, 25% 40%, 50% 30%, 75% 20%, 100% 10%);
-        }
-
-        .mountain-checkpoint {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: #ffd700;
-            border-radius: 50%;
-            border: 3px solid #0f0f23;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .mountain-checkpoint:hover {
-            transform: scale(1.3);
-            box-shadow: 0 0 20px #ffd700;
-        }
-
-        /* SLIDE 9: Recursos 3D */
-        .slide-9 {
-            background: radial-gradient(circle at center, #2a2d5a 0%, #1a1a3a 100%);
-        }
-
-        .pie-chart-3d {
-            width: 300px;
-            height: 300px;
-            margin: 2rem auto;
-            position: relative;
-            border-radius: 50%;
-            background: conic-gradient(
-                #66fcf1 0deg 162deg,
-                #4ecdc4 162deg 288deg,
-                #45b7aa 288deg 360deg
-            );
-            transform: perspective(200px) rotateX(25deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .pie-slice {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .pie-slice:hover {
-            transform: translateZ(20px);
-        }
-
-        /* SLIDE 10: Gráficas Científicas */
-        .slide-10 {
-            background: linear-gradient(135deg, #1a2332 0%, #2d1b3d 100%);
-        }
-
-        .scientific-chart {
-            width: 100%;
-            max-width: 600px;
-            height: 300px;
-            margin: 2rem auto;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            position: relative;
-            border: 1px solid rgba(102, 252, 241, 0.3);
-        }
-
-        .chart-line {
-            position: absolute;
-            bottom: 50px;
-            left: 50px;
-            right: 50px;
-            height: 200px;
-            background: linear-gradient(to right, transparent, #66fcf1, transparent);
-            clip-path: polygon(0% 100%, 25% 80%, 50% 40%, 75% 20%, 100% 0%);
-        }
-
-        /* SLIDE 11: Constelación */
-        .slide-11 {
-            background: radial-gradient(circle at center, #0f0f23 0%, #1a1a3a 100%);
-        }
-
-        .constellation {
-            position: relative;
-            width: 500px;
-            height: 400px;
-            margin: 2rem auto;
-        }
-
-        .star {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #66fcf1;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: starTwinkle 3s ease-in-out infinite;
-        }
-
-        @keyframes starTwinkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-
-        .star:hover {
-            transform: scale(1.5);
-            box-shadow: 0 0 30px #66fcf1;
-        }
-
-        .constellation-line {
-            position: absolute;
-            height: 2px;
-            background: rgba(102, 252, 241, 0.5);
-            transform-origin: left center;
-        }
-
-        /* SLIDE 12: Cohete */
-        .slide-12 {
-            background: linear-gradient(to bottom, #0f0f23 0%, #1a2332 100%);
-        }
-
-        .rocket-container {
-            position: relative;
-            width: 300px;
-            height: 500px;
-            margin: 2rem auto;
-        }
-
-        .rocket {
-            width: 80px;
-            height: 200px;
-            background: linear-gradient(to bottom, #66fcf1, #4ecdc4);
-            border-radius: 40px 40px 10px 10px;
-            margin: 0 auto;
-            position: relative;
-            animation: rocketShake 0.5s ease-in-out infinite;
-        }
-
-        @keyframes rocketShake {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .rocket-fire {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 40px;
-            background: radial-gradient(circle, #ff6b6b, #ffa500, #ffff00);
-            border-radius: 50%;
-            animation: fire 0.3s ease-in-out infinite alternate;
-        }
-
-        @keyframes fire {
-            from { transform: translateX(-50%) scale(1); }
-            to { transform: translateX(-50%) scale(1.2); }
-        }
-
-        /* SLIDE 13: Diamante */
-        .slide-13 {
-            background: radial-gradient(circle at center, #2a2d5a 0%, #0f0f23 100%);
-        }
-
-        .diamond-3d {
-            width: 200px;
-            height: 200px;
-            margin: 3rem auto;
-            position: relative;
-            transform: perspective(500px) rotateX(20deg) rotateY(20deg);
-            animation: diamondRotate 6s ease-in-out infinite;
-        }
-
-        @keyframes diamondRotate {
-            0%, 100% { transform: perspective(500px) rotateX(20deg) rotateY(20deg); }
-            25% { transform: perspective(500px) rotateX(20deg) rotateY(110deg); }
-            50% { transform: perspective(500px) rotateX(20deg) rotateY(200deg); }
-            75% { transform: perspective(500px) rotateX(20deg) rotateY(290deg); }
-        }
-
-        .diamond-face {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(45deg, #66fcf1, #4ecdc4, #45b7aa);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        /* SLIDE 14: Cierre Épico */
-        .slide-14 {
-            background: linear-gradient(135deg, #0f0f23 0%, #2a2d5a 100%);
-        }
-
-        .metamorphosis {
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 2rem;
-            margin: 3rem 0;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        .morph-stage {
-            font-size: 2rem;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            background: rgba(102, 252, 241, 0.1);
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a3a 0%, #2a2d5a 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
             border: 1px solid rgba(102, 252, 241, 0.3);
-            transition: all 0.5s ease;
-            cursor: pointer;
+            color: white;
         }
 
-        .morph-stage:hover {
-            background: rgba(102, 252, 241, 0.2);
-            transform: scale(1.05);
+        .modal.active .modal-content {
+            transform: scale(1);
         }
 
-        .arrow-down {
-            font-size: 2rem;
-            color: #66fcf1;
-            animation: bounceDown 2s ease-in-out infinite;
-        }
-
-        @keyframes bounceDown {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(10px); }
-        }
-
-        .signature {
-            font-family: 'Courier Prime', cursive;
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
             font-size: 1.5rem;
-            color: #ffd700;
-            margin-top: 3rem;
-            animation: writeSignature 3s ease-in-out;
+            cursor: pointer;
+            color: #66fcf1;
+            transition: all 0.3s ease;
         }
 
-        @keyframes writeSignature {
-            from { width: 0; }
-            to { width: 100%; }
+        .modal-close:hover {
+            transform: scale(1.2);
+            color: #ff6b6b;
+        }
+
+        .modal-title {
+            color: #66fcf1;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .modal-description {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-details {
+            background: rgba(102, 252, 241, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(102, 252, 241, 0.2);
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #66fcf1;
         }
 
         /* Navigation Controls */
@@ -826,6 +681,22 @@
             cursor: not-allowed;
         }
 
+        /* Instruction Text */
+        .instruction-text {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(102, 252, 241, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(102, 252, 241, 0.3);
+            font-size: 0.9rem;
+            color: #66fcf1;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .quantum-logo { font-size: 3rem; }
@@ -834,6 +705,7 @@
             .metro-map { flex-direction: column; }
             .periodic-table { grid-template-columns: repeat(2, 1fr); }
             .slide-nav { display: none; }
+            .instruction-text { display: none; }
         }
     </style>
 </head>
@@ -846,14 +718,14 @@
         // Floating Equations Component
         const FloatingEquations = () => {
             const equations = [
-                "E = mc²", "∑F = ma", "E = ℏω", "∆x∆p ≥ ℏ/2", 
+                "E = mc²", "∑F = ma", "E = ℏω", "∆x∆p ≥ ℏ/2",
                 "∇ × E = -∂B/∂t", "F = k(x₁-x₂)", "PV = nRT", "S = k log W"
             ];
 
             return (
                 <div className="floating-equations">
                     {equations.map((eq, index) => (
-                        <div 
+                        <div
                             key={index}
                             className="equation"
                             style={{
@@ -870,28 +742,111 @@
             );
         };
 
-        // Slide 1: Portada Épica
-        const Slide1 = ({ isActive }) => (
-            <div className={`slide slide-1 ${isActive ? 'active' : ''}`}>
-                <div className="slide-content">
-                    <h1 className="quantum-logo">QUANTUM LEAP</h1>
-                    <div className="equation-transform">
-                        <span>E = mc²</span>
-                        <span>→</span>
-                        <span className="heart-beat">❤️</span>
+        // Modal Component
+        const Modal = ({ isOpen, onClose, content }) => {
+            if (!content) return null;
+
+            return (
+                <div className={`modal ${isOpen ? 'active' : ''}`} onClick={onClose}>
+                    <div className="modal-content" onClick={e => e.stopPropagation()}>
+                        <button className="modal-close" onClick={onClose}>
+                            <i className="fas fa-times"></i>
+                        </button>
+                        {content.icon && (
+                            <div className="modal-icon">
+                                {content.icon}
+                            </div>
+                        )}
+                        <h2 className="modal-title">{content.title}</h2>
+                        <p className="modal-description">{content.description}</p>
+                        {content.details && (
+                            <div className="modal-details">
+                                <strong>Detalles de Implementación:</strong>
+                                <p>{content.details}</p>
+                            </div>
+                        )}
+                        {content.activities && (
+                            <div className="modal-details">
+                                <strong>Actividades Clave:</strong>
+                                <ul style={{ marginTop: '0.5rem', paddingLeft: '1.5rem' }}>
+                                    {content.activities.map((activity, index) => (
+                                        <li key={index} style={{ marginBottom: '0.5rem' }}>{activity}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                        {content.metrics && (
+                            <div className="modal-details">
+                                <strong>Métricas de Éxito:</strong>
+                                <ul style={{ marginTop: '0.5rem', paddingLeft: '1.5rem' }}>
+                                    {content.metrics.map((metric, index) => (
+                                        <li key={index} style={{ marginBottom: '0.5rem' }}>{metric}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
-                    <p className="tagline">Donde la ciencia abraza las emociones</p>
                 </div>
-            </div>
-        );
+            );
+        };
+
+        // Slide 1: Portada Épica
+        const Slide1 = ({ isActive, onOpenModal }) => {
+            const handleEquationClick = () => {
+                onOpenModal({
+                    icon: "🧬",
+                    title: "La Transformación Cuántica",
+                    description: "Esta ecuación representa la esencia de QUANTUM LEAP: transformar la energía del conocimiento científico en conexión emocional y crecimiento personal.",
+                    details: "Utilizamos la famosa ecuación de Einstein como metáfora: así como una pequeña cantidad de masa puede generar enormes cantidades de energía, una pequeña chispa de comprensión científica puede generar grandes transformaciones personales y académicas en nuestros estudiantes."
+                });
+            };
+
+            return (
+                <div className={`slide slide-1 ${isActive ? 'active' : ''}`}>
+                    <div className="slide-content">
+                        <h1 className="quantum-logo">QUANTUM LEAP</h1>
+                        <div className="equation-transform" onClick={handleEquationClick}>
+                            <span>E = mc²</span>
+                            <span>→</span>
+                            <span className="heart-beat">❤️</span>
+                        </div>
+                        <p className="tagline">Donde la ciencia abraza las emociones</p>
+                    </div>
+                </div>
+            );
+        };
 
         // Slide 2: Dashboard Crisis
-        const Slide2 = ({ isActive }) => {
+        const Slide2 = ({ isActive, onOpenModal }) => {
             const metrics = [
-                { label: "😰 ANSIEDAD", value: 65 },
-                { label: "😵 BLOQUEO MENTAL", value: 58 },
-                { label: "⏰ GESTIÓN TIEMPO", value: 72 },
-                { label: "💔 DESCONEXIÓN", value: 48 }
+                { 
+                    label: "�� ANSIEDAD", 
+                    value: 65,
+                    description: "65% de estudiantes universitarios reportan niveles altos de ansiedad académica",
+                    details: "Esta cifra proviene de estudios recientes en universidades latinoamericanas. La ansiedad académica afecta especialmente a estudiantes de carreras STEM.",
+                    impact: "Reduce rendimiento académico en 30% y aumenta deserción"
+                },
+                { 
+                    label: "😵 BLOQUEO MENTAL", 
+                    value: 58,
+                    description: "58% experimenta bloqueos mentales durante exámenes y evaluaciones",
+                    details: "Los bloqueos mentales son especialmente frecuentes en matemáticas y ciencias exactas, creando círculos viciosos de frustración.",
+                    impact: "Genera autoconcepto negativo y evitación de materias desafiantes"
+                },
+                { 
+                    label: "⏰ GESTIÓN TIEMPO", 
+                    value: 72,
+                    description: "72% tiene dificultades severas para organizar su tiempo de estudio",
+                    details: "La falta de técnicas efectivas de gestión del tiempo lleva a procrastinación y estrés de último minuto.",
+                    impact: "Aumenta estrés y disminuye calidad del aprendizaje"
+                },
+                { 
+                    label: "💔 DESCONEXIÓN", 
+                    value: 48,
+                    description: "48% se siente desconectado de sus estudios y carrera profesional",
+                    details: "Los estudiantes no ven la relevancia práctica de lo que estudian, especialmente en materias teóricas.",
+                    impact: "Reduce motivación intrínseca y aumenta riesgo de abandono"
+                }
             ];
 
             return (
@@ -899,8 +854,21 @@
                     <div className="slide-content">
                         <div className="crisis-dashboard">
                             <h2 className="alert-header">🚨 ALERTA ESTUDIANTIL 2025</h2>
+                            <p style={{ marginBottom: '2rem', color: '#ffa500' }}>
+                                <strong>Haz click en cada métrica para ver detalles</strong>
+                            </p>
                             {metrics.map((metric, index) => (
-                                <div key={index} className="metric-bar">
+                                <div 
+                                    key={index} 
+                                    className="metric-bar"
+                                    onClick={() => onOpenModal({
+                                        icon: metric.label.split(' ')[0],
+                                        title: metric.label,
+                                        description: metric.description,
+                                        details: metric.details,
+                                        metrics: [metric.impact]
+                                    })}
+                                >
                                     <span>{metric.label}</span>
                                     <div className="progress-visual">
                                         <div 
@@ -918,55 +886,142 @@
         };
 
         // Slide 3: Hipótesis Visual
-        const Slide3 = ({ isActive }) => (
-            <div className={`slide slide-3 ${isActive ? 'active' : ''}`}>
-                <div className="slide-content">
-                    <div className="hypothesis-equation">
-                        <span>🔬</span>
-                        <span>+</span>
-                        <span>❤️</span>
-                        <span>=</span>
-                        <span>✨</span>
-                    </div>
-                    <div className="brain-visual">
-                        <i className="fas fa-brain" style={{ fontSize: '4rem', color: '#0f0f23' }}></i>
-                        <div className="orbiting-concepts">
-                            {["🧪", "📊", "⚡", "🎯"].map((icon, index) => (
-                                <div 
-                                    key={index}
-                                    className="concept"
-                                    style={{ 
-                                        animationDelay: `${index * 2.5}s`,
-                                        top: index === 0 ? '0%' : index === 1 ? '50%' : index === 2 ? '100%' : '50%',
-                                        left: index === 0 ? '50%' : index === 1 ? '100%' : index === 2 ? '50%' : '0%'
-                                    }}
-                                >
-                                    {icon}
-                                </div>
-                            ))}
+        const Slide3 = ({ isActive, onOpenModal }) => {
+            const concepts = [
+                {
+                    icon: "🧪",
+                    title: "Experimentación Vital",
+                    description: "Cada problema de la vida se trata como un experimento científico con hipótesis, metodología y conclusiones."
+                },
+                {
+                    icon: "📊",
+                    title: "Análisis de Datos Emocionales",
+                    description: "Utilizamos gráficas y estadísticas para visualizar patrones emocionales y comportamentales."
+                },
+                {
+                    icon: "⚡",
+                    title: "Energía de Transformación",
+                    description: "Aplicamos conceptos de física como conservación de energía para optimizar el rendimiento académico."
+                },
+                {
+                    icon: "🎯",
+                    title: "Precisión Científica",
+                    description: "Usamos el método científico para establecer metas claras, medibles y alcanzables."
+                }
+            ];
+
+            return (
+                <div className={`slide slide-3 ${isActive ? 'active' : ''}`}>
+                    <div className="slide-content">
+                        <div 
+                            className="hypothesis-equation"
+                            onClick={() => onOpenModal({
+                                icon: "🧬",
+                                title: "La Hipótesis QUANTUM LEAP",
+                                description: "Nuestra hipótesis central: Cuando combinamos el rigor científico con la comprensión emocional, obtenemos transformaciones extraordinarias en el desarrollo académico y personal.",
+                                details: "Esta ecuación no es solo simbólica. Representa años de investigación que demuestran que los estudiantes que aprenden a aplicar metodología científica a sus vidas personales muestran mejoras significativas en rendimiento académico, bienestar emocional y satisfacción personal."
+                            })}
+                        >
+                            <span>🔬</span>
+                            <span>+</span>
+                            <span>❤️</span>
+                            <span>=</span>
+                            <span>✨</span>
                         </div>
+                        <div 
+                            className="brain-visual"
+                            onClick={() => onOpenModal({
+                                icon: "🧠",
+                                title: "Cerebro Integrado",
+                                description: "El cerebro humano funciona mejor cuando integra pensamiento analítico (hemisferio izquierdo) con procesamiento emocional (hemisferio derecho).",
+                                details: "QUANTUM LEAP entrena esta integración a través de ejercicios específicos que conectan conceptos científicos con experiencias emocionales, creando nuevas redes neuronales más robustas."
+                            })}
+                        >
+                            <i className="fas fa-brain" style={{ fontSize: '4rem', color: '#0f0f23' }}></i>
+                            <div className="orbiting-concepts">
+                                {concepts.map((concept, index) => (
+                                    <div 
+                                        key={index}
+                                        className="concept"
+                                        style={{ 
+                                            animationDelay: `${index * 2.5}s`,
+                                            top: index === 0 ? '0%' : index === 1 ? '50%' : index === 2 ? '100%' : '50%',
+                                            left: index === 0 ? '50%' : index === 1 ? '100%' : index === 2 ? '50%' : '0%'
+                                        }}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            onOpenModal(concept);
+                                        }}
+                                    >
+                                        {concept.icon}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <h2>CIENCIA + HUMANIDAD = TRANSFORMACIÓN</h2>
                     </div>
-                    <h2>CIENCIA + HUMANIDAD = TRANSFORMACIÓN</h2>
                 </div>
-            </div>
-        );
+            );
+        };
 
         // Slide 4: Población Hexagonal
-        const Slide4 = ({ isActive }) => {
+        const Slide4 = ({ isActive, onOpenModal }) => {
             const personas = [
-                { icon: "��", label: "STEM Ansiosos", color: "#66fcf1" },
-                { icon: "🤔", label: "Curiosos", color: "#4ecdc4" },
-                { icon: "🚫", label: "Bloqueados", color: "#45b7aa" },
-                { icon: "📚", label: "Humanidades+", color: "#5fb3d3" }
+                { 
+                    icon: "🔬", 
+                    label: "STEM Ansiosos", 
+                    color: "#66fcf1",
+                    description: "Estudiantes de carreras científicas con alta ansiedad matemática",
+                    details: "Representan el 40% de nuestro grupo objetivo. Son estudiantes con aptitudes técnicas pero que han desarrollado bloqueos emocionales hacia las matemáticas y ciencias exactas.",
+                    profile: "Edad 18-22 años, carreras como Ingeniería, Medicina, Biología. Necesitan técnicas de regulación emocional específicas para materias cuantitativas."
+                },
+                { 
+                    icon: "🤔", 
+                    label: "Curiosos", 
+                    color: "#4ecdc4",
+                    description: "Estudiantes con alta curiosidad pero baja confianza académica",
+                    details: "El 25% del grupo. Tienen interés genuino por aprender pero dudan de sus capacidades. Necesitan herramientas de autoconfianza basadas en evidencia científica.",
+                    profile: "Diversos backgrounds académicos, alta motivación intrínseca pero autoestima académica frágil. Responden bien a metodologías de experimentación personal."
+                },
+                { 
+                    icon: "🚫", 
+                    label: "Bloqueados", 
+                    color: "#45b7aa",
+                    description: "Estudiantes con bloqueos específicos en materias clave",
+                    details: "El 20% del grupo. Han tenido experiencias traumáticas previas con matemáticas o ciencias. Requieren aproximación gradual y técnicas de desensibilización.",
+                    profile: "Bloqueos desarrollados en secundaria o primeros años universitarios. Necesitan reconstruir relación positiva con el aprendizaje cuantitativo."
+                },
+                { 
+                    icon: "📚", 
+                    label: "Humanidades+", 
+                    color: "#5fb3d3",
+                    description: "Estudiantes de humanidades que quieren desarrollar pensamiento científico",
+                    details: "El 15% del grupo. Estudiantes de carreras como Psicología, Derecho, Literatura que reconocen el valor del pensamiento científico para su desarrollo profesional.",
+                    profile: "Buscan herramientas de análisis riguroso y toma de decisiones basada en evidencia. Valoran la aplicación práctica del método científico en sus áreas."
+                }
             ];
 
             return (
                 <div className={`slide slide-4 ${isActive ? 'active' : ''}`}>
                     <div className="slide-content">
-                        <h2 style={{ marginBottom: '3rem', fontSize: '2.5rem' }}>25 Mentes Brillantes</h2>
+                        <h2 style={{ marginBottom: '1rem', fontSize: '2.5rem' }}>25 Mentes Brillantes</h2>
+                        <p style={{ marginBottom: '2rem', color: '#ffa500' }}>
+                            <strong>Haz click en cada perfil para conocer más detalles</strong>
+                        </p>
                         <div className="hexagon-grid">
                             {personas.map((persona, index) => (
-                                <div key={index} className="hexagon" style={{ background: persona.color }}>
+                                <div 
+                                    key={index} 
+                                    className="hexagon" 
+                                    style={{ background: persona.color }}
+                                    onClick={() => onOpenModal({
+                                        icon: persona.icon,
+                                        title: persona.label,
+                                        description: persona.description,
+                                        details: persona.details,
+                                        metrics: [persona.profile]
+                                    })}
+                                >
                                     <div className="hexagon-content">
                                         <div style={{ fontSize: '2rem' }}>{persona.icon}</div>
                                         <div style={{ fontSize: '0.9rem' }}>{persona.label}</div>
@@ -983,22 +1038,87 @@
         };
 
         // Slide 5: Metro Timeline
-        const Slide5 = ({ isActive }) => {
+        const Slide5 = ({ isActive, onOpenModal }) => {
             const estaciones = [
-                { num: 1, label: "CALIBRACIÓN", weeks: "1-3" },
-                { num: 2, label: "HERRAMIENTAS", weeks: "4-9" },
-                { num: 3, label: "APLICACIÓN", weeks: "10-13" },
-                { num: 4, label: "MEDICIÓN", weeks: "14-16" }
+                { 
+                    num: 1, 
+                    label: "CALIBRACIÓN", 
+                    weeks: "1-3",
+                    description: "Fase de Evaluación Diagnóstica y Personalización",
+                    details: "Durante estas 3 semanas realizamos una evaluación integral de cada estudiante: nivel académico actual, patrones de estudio, fortalezas emocionales y áreas de oportunidad.",
+                    activities: [
+                        "Test de ansiedad matemática y científica",
+                        "Evaluación de estilos de aprendizaje",
+                        "Mapeo de creencias limitantes sobre capacidades",
+                        "Establecimiento de línea base emocional y académica",
+                        "Diseño de plan personalizado de intervención"
+                    ]
+                },
+                { 
+                    num: 2, 
+                    label: "HERRAMIENTAS", 
+                    weeks: "4-9",
+                    description: "Fase de Construcción del Arsenal Científico-Emocional",
+                    details: "6 semanas intensivas donde cada estudiante desarrolla su kit personalizado de herramientas basadas en principios científicos aplicados a la vida universitaria.",
+                    activities: [
+                        "Metáforas científicas personalizadas (ej: inercia emocional, momentum académico)",
+                        "Técnicas de experimentación vital (hipótesis de vida, variables controladas)",
+                        "Matemática emocional (ecuaciones de bienestar, gráficas de humor)",
+                        "Física del rendimiento (conservación de energía mental, equilibrio trabajo-descanso)",
+                        "Laboratorio de resolución de problemas académicos"
+                    ]
+                },
+                { 
+                    num: 3, 
+                    label: "APLICACIÓN", 
+                    weeks: "10-13",
+                    description: "Fase de Transferencia a Situaciones Reales",
+                    details: "4 semanas donde los estudiantes aplican sus herramientas científicas a desafíos académicos reales: exámenes, proyectos, presentaciones y situaciones de estrés.",
+                    activities: [
+                        "Aplicación de herramientas en materias específicas de su carrera",
+                        "Resolución de casos reales con metodología científica",
+                        "Refinamiento de estrategias basado en resultados",
+                        "Peer coaching entre estudiantes",
+                        "Documentación de experimentos exitosos"
+                    ]
+                },
+                { 
+                    num: 4, 
+                    label: "MEDICIÓN", 
+                    weeks: "14-16",
+                    description: "Fase de Evaluación de Resultados y Proyección Futura",
+                    details: "Las últimas 3 semanas se dedican a medir resultados cuantitativos y cualitativos, además de preparar a los estudiantes para mantener sus avances de forma autónoma.",
+                    activities: [
+                        "Evaluación post-intervención de ansiedad y rendimiento",
+                        "Análisis estadístico de mejoras académicas",
+                        "Plan de mantenimiento personalizado",
+                        "Entrenamiento en automonitoreo científico",
+                        "Preparación para autonomía académica"
+                    ]
+                }
             ];
 
             return (
                 <div className={`slide slide-5 ${isActive ? 'active' : ''}`}>
                     <div className="slide-content">
-                        <h2 style={{ marginBottom: '3rem', fontSize: '2.5rem' }}>🚇 Línea del Aprendizaje</h2>
+                        <h2 style={{ marginBottom: '1rem', fontSize: '2.5rem' }}>🚇 Línea del Aprendizaje</h2>
+                        <p style={{ marginBottom: '2rem', color: '#ffa500' }}>
+                            <strong>Haz click en cada estación para ver el plan detallado</strong>
+                        </p>
                         <div className="metro-map">
                             <div className="metro-line"></div>
                             {estaciones.map((estacion, index) => (
-                                <div key={index} className="metro-station">
+                                <div 
+                                    key={index} 
+                                    className="metro-station"
+                                    onClick={() => onOpenModal({
+                                        icon: `🚉`,
+                                        title: `Estación ${estacion.num}: ${estacion.label}`,
+                                        description: estacion.description,
+                                        details: estacion.details,
+                                        activities: estacion.activities
+                                    })}
+                                >
                                     <div className="station-number">{estacion.num}</div>
                                     <div className="station-label">{estacion.label}</div>
                                     <div style={{ fontSize: '0.7rem', color: '#0f0f23' }}>S{estacion.weeks}</div>
@@ -1011,71 +1131,154 @@
         };
 
         // Slide 6: Tabla Periódica
-        const Slide6 = ({ isActive }) => {
+        const Slide6 = ({ isActive, onOpenModal }) => {
             const elementos = [
-                { symbol: "Ep", number: "01", name: "Ecuac Pers" },
-                { symbol: "Mt", number: "02", name: "Método Cient" },
-                { symbol: "Fe", number: "03", name: "Física Equil" },
-                { symbol: "Md", number: "04", name: "Medición" }
+                { 
+                    symbol: "Ep", 
+                    number: "01", 
+                    name: "Ecuac Pers",
+                    fullName: "Ecuaciones Personales",
+                    description: "Herramienta para crear fórmulas matemáticas que representen situaciones de vida del estudiante",
+                    details: "Los estudiantes aprenden a modelar sus emociones, metas y desafíos usando ecuaciones matemáticas reales. Por ejemplo: Felicidad = (Logros × Reconocimiento) / Esfuerzo + Constante_de_bienestar_personal.",
+                    applications: "Se aplica en planificación de metas, análisis de decisiones y autorregulación emocional."
+                },
+                { 
+                    symbol: "Mt", 
+                    number: "02", 
+                    name: "Método Cient",
+                    fullName: "Método Científico Aplicado",
+                    description: "Uso sistemático del método científico para resolver problemas de la vida universitaria",
+                    details: "Cada situación problemática se aborda como un experimento: 1) Observación del problema, 2) Hipótesis de solución, 3) Diseño de experimento, 4) Recolección de datos, 5) Análisis y conclusiones.",
+                    applications: "Resolución de conflictos, mejora de hábitos de estudio, toma de decisiones académicas y personales."
+                },
+                { 
+                    symbol: "Fe", 
+                    number: "03", 
+                    name: "Física Equil",
+                    fullName: "Física del Equilibrio",
+                    description: "Aplicación de principios físicos para mantener equilibrio en la vida académica",
+                    details: "Usamos conceptos como inercia (resistencia al cambio), momentum (mantener el impulso), equilibrio de fuerzas (balancear compromisos) y conservación de energía (gestión eficiente del esfuerzo mental).",
+                    applications: "Gestión del tiempo, prevención del burnout, mantenimiento de motivación, balance vida-estudio."
+                },
+                { 
+                    symbol: "Md", 
+                    number: "04", 
+                    name: "Medición",
+                    fullName: "Medición y Análisis",
+                    description: "Herramientas de medición cuantitativa y cualitativa del progreso personal y académico",
+                    details: "Implementamos sistemas de métricas personales: escalas de bienestar, tracking de hábitos, análisis de tendencias emocionales y académicas. Todo basado en datos objetivos y subjetivos.",
+                    applications: "Autoevaluación continua, ajuste de estrategias, validación de hipótesis personales, mejora continua."
+                }
             ];
 
             return (
                 <div className={`slide slide-6 ${isActive ? 'active' : ''}`}>
                     <div className="slide-content">
-                        <h2 style={{ marginBottom: '3rem', fontSize: '2.5rem' }}>🧪 Tabla Periódica de Mentoría</h2>
+                        <h2 style={{ marginBottom: '1rem', fontSize: '2.5rem' }}>🧪 Tabla Periódica de Mentoría</h2>
+                        <p style={{ marginBottom: '2rem', color: '#ffa500' }}>
+                            <strong>Haz click en cada elemento para descubrir sus propiedades</strong>
+                        </p>
                         <div className="periodic-table">
                             {elementos.map((elemento, index) => (
-                                <div key={index} className="element">
+                                <div 
+                                    key={index} 
+                                    className="element"
+                                    onClick={() => onOpenModal({
+                                        icon: "⚛️",
+                                        title: `${elemento.fullName} (${elemento.symbol})`,
+                                        description: elemento.description,
+                                        details: elemento.details,
+                                        metrics: [elemento.applications]
+                                    })}
+                                >
                                     <div className="element-number">{elemento.number}</div>
                                     <div className="element-symbol">{elemento.symbol}</div>
                                     <div className="element-name">{elemento.name}</div>
                                 </div>
                             ))}
                         </div>
+                        <p style={{ marginTop: '2rem', fontSize: '1rem', color: '#66fcf1' }}>
+                            Cada elemento representa una herramienta científica aplicada al desarrollo personal
+                        </p>
                     </div>
                 </div>
             );
         };
 
         // Slide 7: NASA Dashboard
-        const Slide7 = ({ isActive }) => (
-            <div className={`slide slide-7 ${isActive ? 'active' : ''}`}>
-                <div className="slide-content">
-                    <div className="nasa-dashboard">
-                        <div className="dashboard-header">
-                            <i className="fas fa-satellite"></i>
-                            <span>QUANTUM LEAP HQ</span>
-                        </div>
-                        <div className="dashboard-grid">
-                            <div className="dashboard-widget">
-                                <div>EMOCIÓN</div>
-                                <div className="widget-value">7.5/10</div>
-                                <div className="status-light status-green"></div>
+        const Slide7 = ({ isActive, onOpenModal }) => {
+            const widgets = [
+                {
+                    title: "EMOCIÓN",
+                    value: "7.5/10",
+                    description: "Nivel promedio de bienestar emocional del estudiante",
+                    details: "Se mide diariamente usando escalas validadas de bienestar emocional. Incluye indicadores de ansiedad, motivación, autoeficacia y satisfacción académica.",
+                    interpretation: "7.5/10 indica un nivel saludable de bienestar emocional con espacio para mejora."
+                },
+                {
+                    title: "ACADÉMICO",
+                    value: "+15%",
+                    description: "Mejora porcentual en rendimiento académico desde el inicio del programa",
+                    details: "Calculado comparando promedios de calificaciones, tiempo de estudio efectivo y calidad de trabajos entregados antes y durante la intervención.",
+                    interpretation: "+15% representa una mejora significativa que se traduce en aproximadamente 0.5 puntos en escala de 0-4."
+                },
+                {
+                    title: "SOCIAL",
+                    value: "85%",
+                    description: "Porcentaje de participación activa en actividades grupales y colaborativas",
+                    details: "Mide la frecuencia y calidad de participación en grupos de estudio, proyectos colaborativos y actividades de peer learning.",
+                    interpretation: "85% indica excelente integración social académica, factor clave para el éxito universitario."
+                },
+                {
+                    title: "ALERTAS",
+                    value: "2",
+                    description: "Número de indicadores que requieren atención inmediata",
+                    details: "Sistema de alerta temprana que detecta patrones de riesgo: disminución súbita de rendimiento, aumento de ansiedad, aislamiento social o sobrecarga académica.",
+                    interpretation: "2 alertas activas indican necesidad de intervención específica en áreas identificadas."
+                }
+            ];
+
+            return (
+                <div className={`slide slide-7 ${isActive ? 'active' : ''}`}>
+                    <div className="slide-content">
+                        <div className="nasa-dashboard">
+                            <div className="dashboard-header">
+                                <i className="fas fa-satellite"></i>
+                                <span>QUANTUM LEAP HQ</span>
                             </div>
-                            <div className="dashboard-widget">
-                                <div>ACADÉMICO</div>
-                                <div className="widget-value">+15%</div>
-                                <div className="status-light status-green"></div>
-                            </div>
-                            <div className="dashboard-widget">
-                                <div>SOCIAL</div>
-                                <div className="widget-value">85%</div>
-                                <div className="status-light status-yellow"></div>
-                            </div>
-                            <div className="dashboard-widget">
-                                <div>ALERTAS</div>
-                                <div className="widget-value">2</div>
-                                <div className="status-light status-red"></div>
+                            <p style={{ marginBottom: '2rem', color: '#ffa500', textAlign: 'center' }}>
+                                <strong>Haz click en cada métrica para entender qué significa</strong>
+                            </p>
+                            <div className="dashboard-grid">
+                                {widgets.map((widget, index) => (
+                                    <div 
+                                        key={index}
+                                        className="dashboard-widget"
+                                        onClick={() => onOpenModal({
+                                            icon: "📊",
+                                            title: `Métrica: ${widget.title}`,
+                                            description: widget.description,
+                                            details: widget.details,
+                                            metrics: [widget.interpretation]
+                                        })}
+                                    >
+                                        <div>{widget.title}</div>
+                                        <div className="widget-value">{widget.value}</div>
+                                        <div className={`status-light ${index === 0 || index === 1 ? 'status-green' : index === 2 ? 'status-yellow' : 'status-red'}`}></div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        };
 
         // Main Presentation Component
         const Presentation = () => {
             const [currentSlide, setCurrentSlide] = useState(0);
+            const [modalOpen, setModalOpen] = useState(false);
+            const [modalContent, setModalContent] = useState(null);
             const totalSlides = 7;
 
             const nextSlide = () => {
@@ -1090,19 +1293,22 @@
                 setCurrentSlide(index);
             };
 
-            // Auto-advance slides (optional)
-            useEffect(() => {
-                const interval = setInterval(() => {
-                    // nextSlide(); // Uncomment for auto-advance
-                }, 10000);
-                return () => clearInterval(interval);
-            }, []);
+            const openModal = (content) => {
+                setModalContent(content);
+                setModalOpen(true);
+            };
+
+            const closeModal = () => {
+                setModalOpen(false);
+                setModalContent(null);
+            };
 
             // Keyboard navigation
             useEffect(() => {
                 const handleKeyPress = (e) => {
                     if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
                     if (e.key === 'ArrowLeft') prevSlide();
+                    if (e.key === 'Escape') closeModal();
                 };
                 window.addEventListener('keydown', handleKeyPress);
                 return () => window.removeEventListener('keydown', handleKeyPress);
@@ -1112,6 +1318,11 @@
                 <div className="presentation-container">
                     <div className="chalkboard-bg"></div>
                     <FloatingEquations />
+                    
+                    {/* Instruction Text */}
+                    <div className="instruction-text">
+                        <i className="fas fa-hand-pointer"></i> Haz click en los elementos para más información
+                    </div>
                     
                     {/* Slide Navigation */}
                     <div className="slide-nav">
@@ -1125,13 +1336,13 @@
                     </div>
 
                     {/* Slides */}
-                    <Slide1 isActive={currentSlide === 0} />
-                    <Slide2 isActive={currentSlide === 1} />
-                    <Slide3 isActive={currentSlide === 2} />
-                    <Slide4 isActive={currentSlide === 3} />
-                    <Slide5 isActive={currentSlide === 4} />
-                    <Slide6 isActive={currentSlide === 5} />
-                    <Slide7 isActive={currentSlide === 6} />
+                    <Slide1 isActive={currentSlide === 0} onOpenModal={openModal} />
+                    <Slide2 isActive={currentSlide === 1} onOpenModal={openModal} />
+                    <Slide3 isActive={currentSlide === 2} onOpenModal={openModal} />
+                    <Slide4 isActive={currentSlide === 3} onOpenModal={openModal} />
+                    <Slide5 isActive={currentSlide === 4} onOpenModal={openModal} />
+                    <Slide6 isActive={currentSlide === 5} onOpenModal={openModal} />
+                    <Slide7 isActive={currentSlide === 6} onOpenModal={openModal} />
 
                     {/* Navigation Controls */}
                     <div className="nav-controls">
@@ -1162,6 +1373,13 @@
                     }}>
                         {currentSlide + 1} / {totalSlides}
                     </div>
+
+                    {/* Modal */}
+                    <Modal 
+                        isOpen={modalOpen}
+                        onClose={closeModal}
+                        content={modalContent}
+                    />
                 </div>
             );
         };
