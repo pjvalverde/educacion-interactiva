@@ -3,82 +3,1056 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUANTUM LEAP - Mentorías PUCE</title>
+    <title>QUANTUM LEAP - Mentoría Interactiva PUCE</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #2563EB, #3B82F6);
-            color: white;
-            min-height: 100vh;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .hero { text-align: center; padding: 4rem 0; }
-        .logo { font-size: 4rem; margin-bottom: 1rem; }
-        .subtitle { font-size: 1.5rem; margin-bottom: 2rem; }
-        .description { font-size: 1.1rem; margin-bottom: 3rem; }
-        .section { background: rgba(255,255,255,0.1); margin: 2rem 0; padding: 3rem; border-radius: 20px; }
-        .section h2 { font-size: 2rem; margin-bottom: 1.5rem; text-align: center; }
-        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .card { background: rgba(255,255,255,0.15); padding: 2rem; border-radius: 15px; }
-        .card h3 { margin-bottom: 1rem; }
-        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; }
-        .stat { background: rgba(255,255,255,0.2); padding: 2rem; border-radius: 15px; }
-        .stat-number { font-size: 3rem; font-weight: bold; display: block; }
-        .footer { text-align: center; padding: 3rem 0; opacity: 0.8; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Particles Background */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(37, 99, 235, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 100px 2rem 2rem;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 10;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Quantum Diagram */
+        .quantum-diagram {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+        }
+
+        .quantum-circle {
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: relative;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .quantum-phase {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            animation: pulse 2s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantum-phase:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .phase-1 { top: -30px; left: 50%; transform: translateX(-50%); }
+        .phase-2 { right: -30px; top: 50%; transform: translateY(-50%); }
+        .phase-3 { bottom: -30px; left: 50%; transform: translateX(-50%); }
+        .phase-4 { left: -30px; top: 50%; transform: translateY(-50%); }
+
+        /* Interactive Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .interactive-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .interactive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed, #2563eb);
+            background-size: 200% 100%;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 200% 0; }
+            50% { background-position: -200% 0; }
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-card:hover .card-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .card-description {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Progress Bars */
+        .progress-container {
+            margin: 2rem 0;
+        }
+
+        .progress-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+            border-radius: 10px;
+            transition: width 2s ease-in-out;
+            width: 0%;
+        }
+
+        .progress-fill.animate {
+            width: var(--progress-width);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #2563eb, #7c3aed);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            transform: translateX(50px);
+        }
+
+        .timeline-item:nth-child(even).visible {
+            transform: translateX(0);
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 1rem;
+            width: 20px;
+            height: 20px;
+            background: #2563eb;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: pulse-dot 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .timeline-dot:hover {
+            transform: translateX(-50%) scale(1.5);
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .ripple:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Counter Animation */
+        .counter {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .quantum-diagram { display: none; }
+            .nav-links { display: none; }
+            .timeline::before { left: 30px; }
+            .timeline-content { width: calc(100% - 80px); margin-left: 60px !important; }
+            .timeline-dot { left: 30px; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="hero">
-            <h1 class="logo">⚛️ QUANTUM LEAP</h1>
-            <h2 class="subtitle">Sistema Revolucionario de Mentorías PUCE</h2>
-            <p class="description">Transformando la educación universitaria a través de mentorías personalizadas.</p>
-        </div>
+    <div id="root"></div>
 
-        <div class="section">
-            <h2>🎯 Propuesta Innovadora</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>🎯 Personalización Total</h3>
-                    <p>Cada estudiante recibe un plan de mentoría único.</p>
-                </div>
-                <div class="card">
-                    <h3>🧠 IA Cuántica</h3>
-                    <p>Tecnología avanzada para análisis educativo.</p>
-                </div>
-                <div class="card">
-                    <h3>💫 Ecosistema Integral</h3>
-                    <p>Red colaborativa de éxito académico.</p>
-                </div>
-            </div>
-        </div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
 
-        <div class="section">
-            <h2>📊 Impacto Proyectado</h2>
-            <div class="stats">
-                <div class="stat">
-                    <span class="stat-number">95%</span>
-                    <span>Satisfacción Estudiantes</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">89%</span>
-                    <span>Mejora Rendimiento</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">76%</span>
-                    <span>Retención Académica</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number">40%</span>
-                    <span>Reducción Deserción</span>
-                </div>
-            </div>
-        </div>
-    </div>
+        // Particles Component
+        const ParticlesBackground = () => {
+            const [particles, setParticles] = useState([]);
 
-    <div class="footer">
-        <p>© 2024 PUCE - Pontificia Universidad Católica del Ecuador</p>
-    </div>
+            useEffect(() => {
+                const newParticles = [];
+                for (let i = 0; i < 50; i++) {
+                    newParticles.push({
+                        id: i,
+                        left: Math.random() * 100,
+                        animationDelay: Math.random() * 6,
+                        size: Math.random() * 4 + 2,
+                    });
+                }
+                setParticles(newParticles);
+            }, []);
+
+            return (
+                <div className="particles-container">
+                    {particles.map(particle => (
+                        <div
+                            key={particle.id}
+                            className="particle"
+                            style={{
+                                left: `${particle.left}%`,
+                                animationDelay: `${particle.animationDelay}s`,
+                                width: `${particle.size}px`,
+                                height: `${particle.size}px`,
+                            }}
+                        />
+                    ))}
+                </div>
+            );
+        };
+
+        // Navigation Component
+        const Navigation = ({ activeSection, setActiveSection }) => {
+            const sections = [
+                { id: 'hero', label: 'Inicio' },
+                { id: 'metodologia', label: 'Metodología' },
+                { id: 'fases', label: 'Fases' },
+                { id: 'recursos', label: 'Recursos' },
+                { id: 'impacto', label: 'Impacto' }
+            ];
+
+            return (
+                <nav className="navbar">
+                    <div className="nav-content">
+                        <a href="#" className="logo">
+                            <i className="fas fa-atom"></i> QUANTUM LEAP
+                        </a>
+                        <ul className="nav-links">
+                            {sections.map(section => (
+                                <li key={section.id}>
+                                    <a
+                                        className={`nav-link ripple ${activeSection === section.id ? 'active' : ''}`}
+                                        onClick={() => setActiveSection(section.id)}
+                                    >
+                                        {section.label}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </nav>
+            );
+        };
+
+        // Hero Section Component
+        const HeroSection = ({ onExploreClick, onPhaseClick }) => {
+            return (
+                <section id="hero" className="section hero visible">
+                    <div className="section-content">
+                        <div className="hero-content">
+                            <h1 className="hero-title floating">QUANTUM LEAP</h1>
+                            <p className="hero-subtitle">
+                                Mentoría con Pensamiento Científico para la Vida Universitaria
+                            </p>
+                            <button className="cta-button ripple" onClick={onExploreClick}>
+                                <i className="fas fa-rocket"></i> Explorar Programa
+                            </button>
+                        </div>
+                        
+                        <div className="quantum-diagram floating">
+                            <div className="quantum-circle">
+                                <div className="quantum-phase phase-1" onClick={() => onPhaseClick(1)}>F1</div>
+                                <div className="quantum-phase phase-2" onClick={() => onPhaseClick(2)}>F2</div>
+                                <div className="quantum-phase phase-3" onClick={() => onPhaseClick(3)}>F3</div>
+                                <div className="quantum-phase phase-4" onClick={() => onPhaseClick(4)}>F4</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Interactive Card Component
+        const InteractiveCard = ({ icon, title, description, onClick, color = "#2563eb" }) => {
+            return (
+                <div className="interactive-card ripple floating" onClick={onClick}>
+                    <div className="card-icon" style={{ color }}>
+                        <i className={icon}></i>
+                    </div>
+                    <h3 className="card-title">{title}</h3>
+                    <p className="card-description">{description}</p>
+                </div>
+            );
+        };
+
+        // Progress Bar Component
+        const ProgressBar = ({ label, percentage, animated }) => {
+            return (
+                <div className="progress-item">
+                    <div className="progress-label">
+                        <span>{label}</span>
+                        <span>{percentage}%</span>
+                    </div>
+                    <div className="progress-bar">
+                        <div 
+                            className={`progress-fill ${animated ? 'animate' : ''}`}
+                            style={{ '--progress-width': `${percentage}%` }}
+                        />
+                    </div>
+                </div>
+            );
+        };
+
+        // Metodología Section
+        const MetodologiaSection = ({ visible, onCardClick }) => {
+            const metodologias = [
+                {
+                    icon: "fas fa-microscope",
+                    title: "Metáforas Científicas",
+                    description: "Traducir conceptos complejos de la vida universitaria usando analogías de física y matemáticas.",
+                    color: "#2563eb",
+                    details: "Utilizamos principios como la teoría de ondas para entender las fluctuaciones emocionales, o la ley de gravedad para explicar la atracción hacia hábitos negativos."
+                },
+                {
+                    icon: "fas fa-flask",
+                    title: "Laboratorio Vital",
+                    description: "Experimentar con diferentes enfoques para resolver problemas académicos y personales.",
+                    color: "#7c3aed",
+                    details: "Cada situación problemática se trata como un experimento científico: hipótesis, metodología, observación y conclusiones."
+                },
+                {
+                    icon: "fas fa-calculator",
+                    title: "Matemática Emocional",
+                    description: "Aplicar modelos matemáticos para entender y gestionar estados emocionales.",
+                    color: "#059669",
+                    details: "Usamos ecuaciones, gráficas y estadísticas para visualizar patrones emocionales y predecir comportamientos."
+                },
+                {
+                    icon: "fas fa-atom",
+                    title: "Física del Bienestar",
+                    description: "Usar principios físicos como energía, momentum y equilibrio para el desarrollo personal.",
+                    color: "#dc2626",
+                    details: "Aplicamos conceptos como conservación de energía, inercia y equilibrio para optimizar el rendimiento académico."
+                }
+            ];
+
+            return (
+                <section id="metodologia" className={`section ${visible ? 'visible' : ''}`} style={{ background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white' }}>
+                    <div className="section-content">
+                        <h2 style={{ fontSize: '3rem', textAlign: 'center', marginBottom: '3rem' }}>
+                            Metodología Innovadora
+                        </h2>
+                        <div className="cards-grid">
+                            {metodologias.map((metodo, index) => (
+                                <InteractiveCard
+                                    key={index}
+                                    icon={metodo.icon}
+                                    title={metodo.title}
+                                    description={metodo.description}
+                                    color={metodo.color}
+                                    onClick={() => onCardClick(metodo)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Timeline Item Component
+        const TimelineItem = ({ phase, weeks, title, description, visible, onClick }) => {
+            return (
+                <div className={`timeline-item ${visible ? 'visible' : ''}`} onClick={onClick}>
+                    <div className="timeline-content">
+                        <h3 style={{ color: '#2563eb', marginBottom: '0.5rem' }}>
+                            Fase {phase} - {weeks} semanas
+                        </h3>
+                        <h4 style={{ marginBottom: '1rem' }}>{title}</h4>
+                        <p>{description}</p>
+                    </div>
+                    <div className="timeline-dot"></div>
+                </div>
+            );
+        };
+
+        // Fases Section
+        const FasesSection = ({ visible, onPhaseClick }) => {
+            const [timelineVisible, setTimelineVisible] = useState(false);
+
+            useEffect(() => {
+                if (visible) {
+                    setTimeout(() => setTimelineVisible(true), 500);
+                }
+            }, [visible]);
+
+            const fases = [
+                {
+                    phase: 1,
+                    weeks: 3,
+                    title: "Calibración Inicial",
+                    description: "Evaluación diagnóstica, establecimiento de línea base y configuración personalizada del programa.",
+                    details: "En esta fase realizamos una evaluación completa del estudiante: nivel académico, patrones de estudio, fortalezas y debilidades emocionales."
+                },
+                {
+                    phase: 2,
+                    weeks: 6,
+                    title: "Construcción de Herramientas",
+                    description: "Desarrollo de metáforas personales, práctica de técnicas científicas aplicadas y consolidación de hábitos.",
+                    details: "Construimos un arsenal de herramientas personalizadas basadas en principios científicos adaptados a las necesidades específicas del estudiante."
+                },
+                {
+                    phase: 3,
+                    weeks: 4,
+                    title: "Aplicación Interdisciplinar",
+                    description: "Transferencia de herramientas a materias específicas, resolución de casos reales y refinamiento de estrategias.",
+                    details: "Aplicamos las herramientas desarrolladas a situaciones reales académicas, desde exámenes hasta proyectos complejos."
+                },
+                {
+                    phase: 4,
+                    weeks: 3,
+                    title: "Medición y Proyección",
+                    description: "Evaluación de resultados, planificación a futuro y preparación para autonomía académica.",
+                    details: "Medimos resultados cuantitativos y cualitativos, y preparamos al estudiante para mantener los avances de forma autónoma."
+                }
+            ];
+
+            return (
+                <section id="fases" className={`section ${visible ? 'visible' : ''}`} style={{ background: 'linear-gradient(135deg, #059669 0%, #0d9488 100%)', color: 'white' }}>
+                    <div className="section-content">
+                        <h2 style={{ fontSize: '3rem', textAlign: 'center', marginBottom: '3rem' }}>
+                            Fases del Programa
+                        </h2>
+                        <div className="timeline">
+                            {fases.map((fase, index) => (
+                                <TimelineItem
+                                    key={index}
+                                    phase={fase.phase}
+                                    weeks={fase.weeks}
+                                    title={fase.title}
+                                    description={fase.description}
+                                    visible={timelineVisible}
+                                    onClick={() => onPhaseClick(fase)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Recursos Section
+        const RecursosSection = ({ visible }) => {
+            const [progressAnimated, setProgressAnimated] = useState(false);
+
+            useEffect(() => {
+                if (visible) {
+                    setTimeout(() => setProgressAnimated(true), 800);
+                }
+            }, [visible]);
+
+            return (
+                <section id="recursos" className={`section ${visible ? 'visible' : ''}`} style={{ background: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)', color: 'white' }}>
+                    <div className="section-content">
+                        <h2 style={{ fontSize: '3rem', textAlign: 'center', marginBottom: '3rem' }}>
+                            Recursos del Programa
+                        </h2>
+                        
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
+                            <div className="floating">
+                                <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem' }}>Distribución de Recursos</h3>
+                                <div className="progress-container">
+                                    <ProgressBar label="Recursos Humanos" percentage={60} animated={progressAnimated} />
+                                    <ProgressBar label="Materiales Didácticos" percentage={25} animated={progressAnimated} />
+                                    <ProgressBar label="Tecnología" percentage={10} animated={progressAnimated} />
+                                    <ProgressBar label="Evaluación" percentage={5} animated={progressAnimated} />
+                                </div>
+                            </div>
+                            
+                            <div className="floating">
+                                <h3 style={{ fontSize: '1.5rem', marginBottom: '2rem' }}>Inversión Año 1</h3>
+                                <div style={{ background: 'rgba(255,255,255,0.1)', padding: '2rem', borderRadius: '15px', cursor: 'pointer', transition: 'transform 0.3s ease' }} className="ripple"
+                                     onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                                     onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}>
+                                    <div className="counter">
+                                        $4,500
+                                    </div>
+                                    <ul style={{ listStyle: 'none', lineHeight: '2' }}>
+                                        <li><i className="fas fa-user"></i> Mentor especializado: $3,000</li>
+                                        <li><i className="fas fa-book"></i> Materiales didácticos: $800</li>
+                                        <li><i className="fas fa-laptop"></i> Plataforma digital: $500</li>
+                                        <li><i className="fas fa-chart-line"></i> Evaluación: $200</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Impacto Section
+        const ImpactoSection = ({ visible }) => {
+            const [countersAnimated, setCountersAnimated] = useState(false);
+
+            useEffect(() => {
+                if (visible) {
+                    setTimeout(() => setCountersAnimated(true), 500);
+                }
+            }, [visible]);
+
+            const AnimatedCounter = ({ target, suffix = "", duration = 2000 }) => {
+                const [count, setCount] = useState(0);
+                
+                useEffect(() => {
+                    if (countersAnimated) {
+                        let start = 0;
+                        const increment = target / (duration / 16);
+                        const timer = setInterval(() => {
+                            start += increment;
+                            if (start >= target) {
+                                setCount(target);
+                                clearInterval(timer);
+                            } else {
+                                setCount(Math.floor(start));
+                            }
+                        }, 16);
+                        return () => clearInterval(timer);
+                    }
+                }, [countersAnimated, target, duration]);
+
+                return <span>{count}{suffix}</span>;
+            };
+
+            return (
+                <section id="impacto" className={`section ${visible ? 'visible' : ''}`} style={{ background: 'linear-gradient(135deg, #1f2937 0%, #374151 100%)', color: 'white' }}>
+                    <div className="section-content">
+                        <h2 style={{ fontSize: '3rem', textAlign: 'center', marginBottom: '3rem' }}>
+                            Impacto Esperado
+                        </h2>
+                        
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', textAlign: 'center' }}>
+                            <div className="floating ripple" style={{ background: 'rgba(37, 99, 235, 0.2)', padding: '2rem', borderRadius: '15px', cursor: 'pointer' }}>
+                                <div className="counter">
+                                    <AnimatedCounter target={25} />
+                                </div>
+                                <p>Estudiantes Beneficiados</p>
+                            </div>
+                            
+                            <div className="floating ripple" style={{ background: 'rgba(34, 197, 94, 0.2)', padding: '2rem', borderRadius: '15px', cursor: 'pointer' }}>
+                                <div className="counter">
+                                    <AnimatedCounter target={85} suffix="%" />
+                                </div>
+                                <p>Retención Esperada</p>
+                            </div>
+                            
+                            <div className="floating ripple" style={{ background: 'rgba(168, 85, 247, 0.2)', padding: '2rem', borderRadius: '15px', cursor: 'pointer' }}>
+                                <div className="counter">
+                                    <AnimatedCounter target={20} suffix="%" />
+                                </div>
+                                <p>Mejora Académica</p>
+                            </div>
+                            
+                            <div className="floating ripple" style={{ background: 'rgba(239, 68, 68, 0.2)', padding: '2rem', borderRadius: '15px', cursor: 'pointer' }}>
+                                <div className="counter">
+                                    <AnimatedCounter target={40} suffix="%" />
+                                </div>
+                                <p>Reducción Ansiedad</p>
+                            </div>
+                        </div>
+
+                        <div style={{ marginTop: '4rem', textAlign: 'center' }}>
+                            <button 
+                                className="cta-button ripple floating"
+                                style={{ fontSize: '1.2rem', padding: '1.5rem 3rem' }}
+                                onClick={() => window.open('mailto:contacto@puce.edu.ec?subject=Interés en QUANTUM LEAP')}
+                            >
+                                <i className="fas fa-envelope"></i> Contactar PUCE
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Modal Component
+        const Modal = ({ isOpen, onClose, content }) => {
+            if (!content) return null;
+
+            return (
+                <div className={`modal ${isOpen ? 'active' : ''}`} onClick={onClose}>
+                    <div className="modal-content" onClick={e => e.stopPropagation()}>
+                        <button className="modal-close" onClick={onClose}>
+                            <i className="fas fa-times"></i>
+                        </button>
+                        <h2 style={{ color: '#2563eb', marginBottom: '1rem' }}>{content.title}</h2>
+                        <p style={{ lineHeight: '1.8', color: '#374151', marginBottom: '1rem' }}>{content.description}</p>
+                        {content.details && (
+                            <div style={{ marginTop: '2rem', padding: '1rem', background: '#f3f4f6', borderRadius: '10px' }}>
+                                <h4>Detalles de Implementación:</h4>
+                                <p>{content.details}</p>
+                            </div>
+                        )}
+                        <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+                            <button className="cta-button ripple" onClick={onClose}>
+                                <i className="fas fa-check"></i> Entendido
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            const [activeSection, setActiveSection] = useState('hero');
+            const [visibleSections, setVisibleSections] = useState({ hero: true });
+            const [modalOpen, setModalOpen] = useState(false);
+            const [modalContent, setModalContent] = useState(null);
+
+            // Handle scroll and section visibility
+            useEffect(() => {
+                const handleScroll = () => {
+                    const sections = ['hero', 'metodologia', 'fases', 'recursos', 'impacto'];
+                    const scrollPos = window.scrollY + window.innerHeight / 2;
+
+                    sections.forEach(sectionId => {
+                        const element = document.getElementById(sectionId);
+                        if (element) {
+                            const { offsetTop, offsetHeight } = element;
+                            if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
+                                setActiveSection(sectionId);
+                            }
+                            
+                            // Show section when it enters viewport
+                            if (scrollPos >= offsetTop - 200) {
+                                setVisibleSections(prev => ({ ...prev, [sectionId]: true }));
+                            }
+                        }
+                    });
+                };
+
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            // Smooth scroll to section
+            const scrollToSection = (sectionId) => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
+            useEffect(() => {
+                if (activeSection !== 'hero') {
+                    scrollToSection(activeSection);
+                }
+            }, [activeSection]);
+
+            const handleExploreClick = () => {
+                setActiveSection('metodologia');
+            };
+
+            const handleCardClick = (metodo) => {
+                setModalContent(metodo);
+                setModalOpen(true);
+            };
+
+            const handlePhaseClick = (phase) => {
+                if (typeof phase === 'number') {
+                    // Clicked from quantum diagram
+                    setActiveSection('fases');
+                } else {
+                    // Clicked from timeline
+                    setModalContent(phase);
+                    setModalOpen(true);
+                }
+            };
+
+            return (
+                <div className="app-container">
+                    <ParticlesBackground />
+                    <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
+                    
+                    <HeroSection onExploreClick={handleExploreClick} onPhaseClick={handlePhaseClick} />
+                    <MetodologiaSection visible={visibleSections.metodologia} onCardClick={handleCardClick} />
+                    <FasesSection visible={visibleSections.fases} onPhaseClick={handlePhaseClick} />
+                    <RecursosSection visible={visibleSections.recursos} />
+                    <ImpactoSection visible={visibleSections.impacto} />
+                    
+                    <Modal 
+                        isOpen={modalOpen} 
+                        onClose={() => setModalOpen(false)} 
+                        content={modalContent} 
+                    />
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
 </body>
 </html>
