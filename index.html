@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUANTUM LEAP - Sistema de Mentorías PUCE</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- React Root -->
+    <div id="root"></div>
+        </div>
+    </nav>
+
+    <!-- React App Container -->
+    <div id="root"></div>
+
+    <!-- Scripts -->
+    <script type="text/babel" src="app.js"></script>
+    <script>
+        // Initialize loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                }, 500);
+            }, 2000);
+        });
+
+        // Mobile navigation
+        document.getElementById('nav-toggle').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+    <!-- React Components -->
+    <script type="text/babel">
+        // Loading Screen Component
+        const LoadingScreen = () => {
+            const [isLoading, setIsLoading] = React.useState(true);
+
+            React.useEffect(() => {
+                const timer = setTimeout(() => {
+                    setIsLoading(false);
+                }, 3000);
+                return () => clearTimeout(timer);
+            }, []);
+
+            if (!isLoading) return null;
+
+            return (
+                <div className="loading-screen">
+                    <div className="quantum-atom">
+                        <div className="nucleus"></div>
+                        <div className="electron electron-1"></div>
+                        <div className="electron electron-2"></div>
+                        <div className="electron electron-3"></div>
+                    </div>
+                    <h2>Cargando QUANTUM LEAP...</h2>
+                </div>
+            );
+        };
+
+        // Navigation Component
+        const Navigation = () => {
+            const [isScrolled, setIsScrolled] = React.useState(false);
+            const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+            const [activeSection, setActiveSection] = React.useState('inicio');
+
+            React.useEffect(() => {
+                const handleScroll = () => {
+                    setIsScrolled(window.scrollY > 50);
+                    
+                    // Update active section based on scroll position
+                    const sections = ['inicio', 'propuesta', 'implementacion', 'beneficios', 'cronograma'];
+                    const scrollPosition = window.scrollY + 100;
+                    
+                    for (let section of sections) {
+                        const element = document.getElementById(section);
+                        if (element && scrollPosition >= element.offsetTop && scrollPosition < element.offsetTop + element.offsetHeight) {
+                            setActiveSection(section);
+                            break;
+                        }
+                    }
+                };
+                
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const scrollToSection = (sectionId) => {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+                setIsMenuOpen(false);
+            };
+
+            return (
+                <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+                    <div className="nav-container">
+                        <div className="nav-brand">
+                            <div className="puce-logo">
+                                <div className="cross-vertical"></div>
+                                <div className="cross-horizontal"></div>
+                                <div className="circle"></div>
+                            </div>
+                            QUANTUM LEAP
+                        </div>
+                        <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+                            <li><a href="#inicio" className={`nav-link ${activeSection === 'inicio' ? 'active' : ''}`} onClick={() => scrollToSection('inicio')}>Inicio</a></li>
+                            <li><a href="#propuesta" className={`nav-link ${activeSection === 'propuesta' ? 'active' : ''}`} onClick={() => scrollToSection('propuesta')}>Propuesta</a></li>
+                            <li><a href="#implementacion" className={`nav-link ${activeSection === 'implementacion' ? 'active' : ''}`} onClick={() => scrollToSection('implementacion')}>Implementación</a></li>
+                            <li><a href="#beneficios" className={`nav-link ${activeSection === 'beneficios' ? 'active' : ''}`} onClick={() => scrollToSection('beneficios')}>Beneficios</a></li>
+                            <li><a href="#cronograma" className={`nav-link ${activeSection === 'cronograma' ? 'active' : ''}`} onClick={() => scrollToSection('cronograma')}>Cronograma</a></li>
+                        </ul>
+                        <div className="nav-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
+            );
+        };
+
+        // Statistics Component
+        const StatCard = ({ number, label, delay = 0 }) => {
+            const [count, setCount] = React.useState(0);
+            const [isVisible, setIsVisible] = React.useState(false);
+
+            React.useEffect(() => {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting) {
+                            setIsVisible(true);
+                        }
+                    },
+                    { threshold: 0.1 }
+                );
+
+                const element = document.getElementById(`stat-${label.replace(/\s+/g, '-').toLowerCase()}`);
+                if (element) observer.observe(element);
+
+                return () => observer.disconnect();
+            }, [label]);
+
+            React.useEffect(() => {
+                if (isVisible) {
+                    const timer = setTimeout(() => {
+                        const increment = number / 50;
+                        const counter = setInterval(() => {
+                            setCount(prev => {
+                                if (prev >= number) {
+                                    clearInterval(counter);
+                                    return number;
+                                }
+                                return Math.min(prev + increment, number);
+                            });
+                        }, 50);
+                    }, delay);
+
+                    return () => clearTimeout(timer);
+                }
+            }, [isVisible, number, delay]);
+
+            return (
+                <div id={`stat-${label.replace(/\s+/g, '-').toLowerCase()}`} className="stat-item">
+                    <span className="stat-number">{Math.round(count)}{number >= 100 ? '%' : ''}</span>
+                    <span className="stat-label">{label}</span>
+                </div>
+            );
+        };
+
+        // Hero Section Component
+        const HeroSection = () => {
+            return (
+                <section id="inicio" className="hero">
+                    <div className="hero-content">
+                        <div className="hero-text">
+                            <h1 className="hero-title">QUANTUM LEAP</h1>
+                            <h2 className="hero-subtitle">Sistema Revolucionario de Mentorías PUCE</h2>
+                            <p className="hero-description">
+                                Transformando la educación universitaria a través de mentorías 
+                                personalizadas basadas en inteligencia artificial cuántica y 
+                                acompañamiento integral para el éxito académico.
+                            </p>
+                            <div className="hero-cta">
+                                <a href="#propuesta" className="btn btn-primary" onClick={() => document.getElementById('propuesta').scrollIntoView({ behavior: 'smooth' })}>
+                                    ⚡ Descubrir Propuesta
+                                </a>
+                                <a href="#implementacion" className="btn btn-secondary" onClick={() => document.getElementById('implementacion').scrollIntoView({ behavior: 'smooth' })}>
+                                    🚀 Ver Implementación
+                                </a>
+                            </div>
+                        </div>
+                        <div className="hero-visual">
+                            <div className="quantum-diagram">
+                                <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <radialGradient id="quantumGradient" cx="50%" cy="50%" r="50%">
+                                            <stop offset="0%" style={{stopColor:"rgba(255,255,255,0.8)"}} />
+                                            <stop offset="100%" style={{stopColor:"rgba(255,255,255,0.1)"}} />
+                                        </radialGradient>
+                                    </defs>
+                                    <circle cx="200" cy="200" r="180" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="2"/>
+                                    <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2"/>
+                                    <circle cx="200" cy="200" r="60" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2"/>
+                                    <circle cx="200" cy="200" r="12" fill="url(#quantumGradient)"/>
+                                    <text x="200" y="350" textAnchor="middle" fill="rgba(255,255,255,0.7)" fontSize="16" fontWeight="600">
+                                        Mentorías Cuánticas
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Propuesta Section Component
+        const PropuestaSection = () => {
+            const [activeTab, setActiveTab] = React.useState('vision');
+
+            const tabs = {
+                vision: {
+                    title: "Visión Transformadora",
+                    content: (
+                        <div className="cards-grid">
+                            <div className="card">
+                                <div className="card-icon">🎯</div>
+                                <h3 className="card-title">Personalización Total</h3>
+                                <p className="card-description">
+                                    Cada estudiante recibe un plan de mentoría único basado en su perfil académico, 
+                                    emocional y de aprendizaje, utilizando algoritmos de IA avanzada.
+                                </p>
+                                <ul className="card-list">
+                                    <li>Análisis psicopedagógico individual</li>
+                                    <li>Adaptación en tiempo real</li>
+                                    <li>Rutas de aprendizaje dinámicas</li>
+                                </ul>
+                            </div>
+                            <div className="card">
+                                <div className="card-icon">🧠</div>
+                                <h3 className="card-title">IA Cuántica</h3>
+                                <p className="card-description">
+                                    Integración de tecnologías de inteligencia artificial cuántica para 
+                                    procesamiento paralelo de datos educativos y predicción de resultados.
+                                </p>
+                                <ul className="card-list">
+                                    <li>Procesamiento cuántico de datos</li>
+                                    <li>Predicciones de rendimiento</li>
+                                    <li>Optimización automática</li>
+                                </ul>
+                            </div>
+                            <div className="card">
+                                <div className="card-icon">💫</div>
+                                <h3 className="card-title">Ecosistema Integral</h3>
+                                <p className="card-description">
+                                    Un sistema completo que conecta estudiantes, mentores, docentes y 
+                                    la institución en una red colaborativa de éxito académico.
+                                </p>
+                                <ul className="card-list">
+                                    <li>Red colaborativa PUCE</li>
+                                    <li>Comunicación 360°</li>
+                                    <li>Métricas de impacto</li>
+                                </ul>
+                            </div>
+                        </div>
+                    )
+                },
+                innovacion: {
+                    title: "Innovación Tecnológica",
+                    content: (
+                        <div className="cards-grid">
+                            <div className="card">
+                                <div className="card-icon">⚛️</div>
+                                <h3 className="card-title">Algoritmos Cuánticos</h3>
+                                <p className="card-description">
+                                    Implementación de algoritmos cuánticos para optimización de emparejamientos 
+                                    mentor-estudiante y predicción de compatibilidad académica.
+                                </p>
+                            </div>
+                            <div className="card">
+                                <div className="card-icon">🔮</div>
+                                <h3 className="card-title">Análisis Predictivo</h3>
+                                <p className="card-description">
+                                    Modelos avanzados de machine learning que predicen desafíos académicos 
+                                    antes de que se conviertan en problemas críticos.
+                                </p>
+                            </div>
+                            <div className="card">
+                                <div className="card-icon">🌐</div>
+                                <h3 className="card-title">Plataforma Adaptativa</h3>
+                                <p className="card-description">
+                                    Interface intuitiva que se adapta al estilo de aprendizaje y preferencias 
+                                    de cada usuario, optimizando la experiencia educativa.
+                                </p>
+                            </div>
+                        </div>
+                    )
+                }
+            };
+
+            return (
+                <section id="propuesta" className="section">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Propuesta QUANTUM LEAP</h2>
+                            <p className="section-subtitle">
+                                Una revolución en el acompañamiento académico que combina lo mejor de la 
+                                tecnología cuántica con el toque humano de las mentorías tradicionales.
+                            </p>
+                        </div>
+
+                        <div className="tabs">
+                            {Object.entries(tabs).map(([key, tab]) => (
+                                <button 
+                                    key={key}
+                                    className={`tab-button ${activeTab === key ? 'active' : ''}`}
+                                    onClick={() => setActiveTab(key)}
+                                >
+                                    {tab.title}
+                                </button>
+                            ))}
+                        </div>
+
+                        {tabs[activeTab].content}
+
+                        <div className="stats-grid">
+                            <StatCard number={95} label="Satisfacción Estudiantes" delay={0} />
+                            <StatCard number={89} label="Mejora Rendimiento" delay={200} />
+                            <StatCard number={76} label="Retención Académica" delay={400} />
+                            <StatCard number={12} label="Tiempo Promedio (semanas)" delay={600} />
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Implementación Section Component
+        const ImplementacionSection = () => {
+            const [selectedPhase, setSelectedPhase] = React.useState(null);
+
+            const phases = [
+                {
+                    id: 1,
+                    title: "Fase I: Análisis y Diagnóstico",
+                    subtitle: "Semanas 1-4",
+                    description: "Evaluación integral del ecosistema educativo PUCE y diseño de arquitectura base del sistema.",
+                    details: [
+                        "Mapeo completo de procesos actuales de mentoría",
+                        "Análisis de necesidades estudiantiles por facultad",
+                        "Evaluación de infraestructura tecnológica existente",
+                        "Diseño de arquitectura del sistema cuántico",
+                        "Definición de métricas de éxito y KPIs"
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Fase II: Desarrollo del Core Cuántico",
+                    subtitle: "Semanas 5-12",
+                    description: "Construcción del núcleo tecnológico con algoritmos de IA cuántica y sistemas de emparejamiento.",
+                    details: [
+                        "Desarrollo de algoritmos cuánticos de emparejamiento",
+                        "Implementación de modelos de ML predictivo",
+                        "Creación de la plataforma web adaptativa",
+                        "Integración con sistemas académicos PUCE",
+                        "Desarrollo de dashboard de mentores y estudiantes"
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Fase III: Prueba Piloto",
+                    subtitle: "Semanas 13-20",
+                    description: "Implementación controlada con grupos selectos de estudiantes y mentores para validación del sistema.",
+                    details: [
+                        "Selección de 100 estudiantes piloto de diferentes facultades",
+                        "Capacitación intensiva de 25 mentores especializados",
+                        "Monitoreo continuo de métricas de rendimiento",
+                        "Recolección de feedback y ajustes iterativos",
+                        "Optimización de algoritmos basada en datos reales"
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Fase IV: Expansión Total",
+                    subtitle: "Semanas 21-32",
+                    description: "Despliegue completo del sistema a toda la comunidad universitaria PUCE.",
+                    details: [
+                        "Escalamiento a toda la población estudiantil",
+                        "Integración completa con sistemas institucionales",
+                        "Capacitación masiva de mentores y personal",
+                        "Implementación de monitoreo automatizado",
+                        "Establecimiento de procesos de mejora continua"
+                    ]
+                }
+            ];
+
+            return (
+                <section id="implementacion" className="section">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Plan de Implementación</h2>
+                            <p className="section-subtitle">
+                                Una hoja de ruta clara y estructurada para la transformación completa 
+                                del sistema de mentorías en 32 semanas.
+                            </p>
+                        </div>
+
+                        <div className="timeline">
+                            {phases.map((phase, index) => (
+                                <div key={phase.id} className="timeline-item">
+                                    <div className="timeline-content" onClick={() => setSelectedPhase(selectedPhase === phase.id ? null : phase.id)}>
+                                        <h3 className="timeline-title">{phase.title}</h3>
+                                        <p className="timeline-subtitle">{phase.subtitle}</p>
+                                        <p className="timeline-description">{phase.description}</p>
+                                        
+                                        {selectedPhase === phase.id && (
+                                            <div style={{ marginTop: '1.5rem' }}>
+                                                <h4 style={{ color: 'var(--puce-blue)', marginBottom: '1rem', fontSize: '1.1rem' }}>
+                                                    Actividades Detalladas:
+                                                </h4>
+                                                <ul className="card-list">
+                                                    {phase.details.map((detail, idx) => (
+                                                        <li key={idx}>{detail}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+                                        
+                                        <div className="progress-bar">
+                                            <div 
+                                                className="progress-fill" 
+                                                style={{ width: `${(index + 1) * 25}%` }}
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Beneficios Section Component
+        const BeneficiosSection = () => {
+            const beneficios = [
+                {
+                    categoria: "Para Estudiantes",
+                    icon: "🎓",
+                    items: [
+                        "Mentoría personalizada basada en perfil único",
+                        "Predicción temprana de desafíos académicos",
+                        "Acceso 24/7 a recursos y orientación",
+                        "Red de apoyo integral y colaborativa",
+                        "Seguimiento continuo del progreso académico"
+                    ]
+                },
+                {
+                    categoria: "Para Mentores",
+                    icon: "👨‍🏫",
+                    items: [
+                        "Herramientas avanzadas de análisis estudiantil",
+                        "Dashboard intuitivo de gestión de mentorías",
+                        "Capacitación continua y especializada",
+                        "Métricas claras de impacto y efectividad",
+                        "Comunidad de práctica entre mentores"
+                    ]
+                },
+                {
+                    categoria: "Para PUCE",
+                    icon: "🏛️",
+                    items: [
+                        "Mejora significativa en tasas de retención",
+                        "Optimización de recursos académicos",
+                        "Datos analíticos para toma de decisiones",
+                        "Posicionamiento como líder en innovación educativa",
+                        "ROI medible en éxito estudiantil"
+                    ]
+                }
+            ];
+
+            return (
+                <section id="beneficios" className="section">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Beneficios Transformadores</h2>
+                            <p className="section-subtitle">
+                                QUANTUM LEAP genera valor exponencial para todos los actores del 
+                                ecosistema educativo PUCE, creando un círculo virtuoso de éxito académico.
+                            </p>
+                        </div>
+
+                        <div className="cards-grid">
+                            {beneficios.map((categoria, index) => (
+                                <div key={index} className="card">
+                                    <div className="card-icon">{categoria.icon}</div>
+                                    <h3 className="card-title">{categoria.categoria}</h3>
+                                    <ul className="card-list">
+                                        {categoria.items.map((item, idx) => (
+                                            <li key={idx}>{item}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+                            <h3 style={{ fontSize: '2rem', color: 'var(--puce-blue)', marginBottom: '2rem' }}>
+                                Impacto Proyectado
+                            </h3>
+                            <div className="stats-grid">
+                                <StatCard number={40} label="Reducción Deserción" delay={0} />
+                                <StatCard number={85} label="Estudiantes Activos" delay={200} />
+                                <StatCard number={92} label="Satisfacción Global" delay={400} />
+                                <StatCard number={3.5} label="ROI Institucional" delay={600} />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Cronograma Section Component
+        const CronogramaSection = () => {
+            const milestones = [
+                { semana: 4, evento: "Diagnóstico Completo", descripcion: "Análisis integral del ecosistema PUCE finalizado" },
+                { semana: 8, evento: "Core Cuántico 50%", descripcion: "Algoritmos básicos implementados y funcionando" },
+                { semana: 12, evento: "Plataforma Beta", descripcion: "Sistema completo listo para pruebas internas" },
+                { semana: 16, evento: "Piloto Activo", descripcion: "100 estudiantes en programa piloto" },
+                { semana: 20, evento: "Validación Exitosa", descripcion: "Métricas confirman efectividad del sistema" },
+                { semana: 24, evento: "Escalamiento 50%", descripcion: "Sistema disponible para 50% de estudiantes" },
+                { semana: 28, evento: "Integración Total", descripcion: "Todos los sistemas PUCE integrados" },
+                { semana: 32, evento: "QUANTUM LEAP Activo", descripcion: "Sistema completamente operativo para toda PUCE" }
+            ];
+
+            return (
+                <section id="cronograma" className="section">
+                    <div className="container">
+                        <div className="section-header">
+                            <h2 className="section-title">Cronograma de Transformación</h2>
+                            <p className="section-subtitle">
+                                32 semanas para revolucionar el acompañamiento académico en PUCE, 
+                                con hitos claros y medibles en cada etapa del proceso.
+                            </p>
+                        </div>
+
+                        <div style={{ position: 'relative', maxWidth: '1000px', margin: '0 auto' }}>
+                            {milestones.map((milestone, index) => (
+                                <div key={index} className="fade-in" style={{ 
+                                    display: 'flex', 
+                                    alignItems: 'center', 
+                                    marginBottom: '2rem',
+                                    flexDirection: index % 2 === 0 ? 'row' : 'row-reverse'
+                                }}>
+                                    <div style={{ 
+                                        flex: '1', 
+                                        textAlign: index % 2 === 0 ? 'right' : 'left',
+                                        paddingRight: index % 2 === 0 ? '2rem' : '0',
+                                        paddingLeft: index % 2 === 0 ? '0' : '2rem'
+                                    }}>
+                                        <div className="card" style={{ display: 'inline-block', maxWidth: '400px' }}>
+                                            <h4 style={{ color: 'var(--puce-blue)', fontSize: '1.3rem', marginBottom: '0.5rem' }}>
+                                                Semana {milestone.semana}: {milestone.evento}
+                                            </h4>
+                                            <p style={{ color: 'var(--puce-gray)', lineHeight: '1.6' }}>
+                                                {milestone.descripcion}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div style={{ 
+                                        width: '60px', 
+                                        height: '60px', 
+                                        background: 'var(--quantum-gradient)',
+                                        borderRadius: '50%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        color: 'white',
+                                        fontWeight: '700',
+                                        fontSize: '1.2rem',
+                                        boxShadow: 'var(--quantum-shadow)',
+                                        flexShrink: 0
+                                    }}>
+                                        {milestone.semana}
+                                    </div>
+                                    <div style={{ flex: '1' }}></div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+                            <div className="card" style={{ display: 'inline-block', maxWidth: '600px' }}>
+                                <h3 style={{ color: 'var(--puce-blue)', fontSize: '1.8rem', marginBottom: '1rem' }}>
+                                    🎯 Meta Final: Universidad del Futuro
+                                </h3>
+                                <p style={{ fontSize: '1.1rem', lineHeight: '1.7', color: 'var(--puce-gray-dark)' }}>
+                                    Al completar las 32 semanas, PUCE se convertirá en la primera universidad 
+                                    en Ecuador con un sistema de mentorías basado en inteligencia artificial 
+                                    cuántica, posicionándose como líder regional en innovación educativa.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Footer Component
+        const Footer = () => {
+            return (
+                <footer className="footer">
+                    <div className="footer-content">
+                        <h3>QUANTUM LEAP - Sistema de Mentorías PUCE</h3>
+                        <p>
+                            Transformando la educación universitaria a través de la innovación tecnológica 
+                            y el acompañamiento personalizado. Una propuesta integral para el éxito académico 
+                            de toda la comunidad PUCE.
+                        </p>
+                        <p style={{ marginTop: '2rem', opacity: '0.7' }}>
+                            © 2024 PUCE - Pontificia Universidad Católica del Ecuador
+                        </p>
+                    </div>
+                </footer>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            React.useEffect(() => {
+                // Intersection Observer for fade-in animations
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe all elements with fade-in class
+                const fadeElements = document.querySelectorAll('.fade-in');
+                fadeElements.forEach(el => observer.observe(el));
+
+                return () => observer.disconnect();
+            }, []);
+
+            return (
+                <div className="App">
+                    <LoadingScreen />
+                    <Navigation />
+                    <main className="main-content">
+                        <HeroSection />
+                        <PropuestaSection />
+                        <ImplementacionSection />
+                        <BeneficiosSection />
+                        <CronogramaSection />
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
